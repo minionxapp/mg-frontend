@@ -45,6 +45,13 @@ const routes = [
           return import('../views/RegisterView.vue')
         }
       },
+      {
+        path: '/table',
+        name: 'table',
+        component: function () {
+          return import('../views/TableView.vue')
+        }
+      },
     ]
 
   }

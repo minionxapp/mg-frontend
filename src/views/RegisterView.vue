@@ -1,6 +1,6 @@
 <template>
+    <content-header title="Register"/>
     <div>
-        <h1>Register</h1>
         <registerComponen/>
     </div>
 </template>

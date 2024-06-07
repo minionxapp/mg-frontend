@@ -1,0 +1,30 @@
+id
+namaTable
+namaKolom
+tipe
+panjang
+notNull
+createRequest
+createResponseSukses
+updateRequest
+updateResponseSukses
+getRequest
+getResponse
+searchRequest
+searchResponse
+removeRequest
+removeResponse
+createdAt
+updatedAt
+testValue
+
+<div class="row">
+   <div class="form-group col-md-6">
+        <label for="XXX">XXX</label>
+        <input id="XXX" type="text" class="form-control" v-model="table.XXX" placeholder="Masukkan XXX"
+            autocomplete="off" />
+        <div v-if="validation.XXX" class="mt-2 alert alert-danger">
+            Masukkan XXX
+        </div>
+    </div>
+</row>

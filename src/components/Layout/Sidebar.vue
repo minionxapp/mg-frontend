@@ -32,6 +32,7 @@
                     <NavItem icon="fas fa-info-circle" link="/about">About</NavItem>
                     <NavItem icon="fas fa-home" link="/register">Register</NavItem>
                     <NavItem icon="fa fa-bicycle" link="/logout">Logout</NavItem>
+                    <NavItem icon="fa fa-calculator" link="/table">Table</NavItem>
                 </ul>
             </nav>
 
