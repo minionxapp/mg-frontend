@@ -47,9 +47,16 @@ const routes = [
       },
       {
         path: '/table',
-        name: 'table',
+        name: 'tableAdd',
         component: function () {
           return import('../views/TableView.vue')
+        }
+      },
+      {
+        path: '/table/index',
+        name: 'tableindex',
+        component: function () {
+          return import('../views/Table/index.vue')
         }
       },
     ]

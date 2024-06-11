@@ -42,8 +42,6 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="notNull">NotNull</label>
-                    <!-- <input id="notNull" type="text" class="form-control" v-model="table.notNull" placeholder="notNull"
-                        autocomplete="off" /> -->
                     <select  id="notNull" v-model="table.notNull" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -54,8 +52,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="createRequest">Create Request</label>
-                    <!-- <input id="createRequest" type="text" class="form-control" v-model="table.createRequest"
-                        placeholder="createRequest" autocomplete="off" /> -->
                     <select  id="createRequest" v-model="table.createRequest" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -68,8 +64,6 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="createResponseSukses">Create Response Sukses</label>
-                    <!-- <input id="createResponseSukses" type="text" class="form-control"
-                        v-model="table.createResponseSukses" placeholder="createResponseSukses" autocomplete="off" /> -->
                     <select  id="createResponseSukses" v-model="table.createResponseSukses" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -80,8 +74,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="updateRequest">Update Request</label>
-                    <!-- <input id="updateRequest" type="text" class="form-control" v-model="table.updateRequest"
-                        placeholder="updateRequest" autocomplete="off" /> -->
                     <select  id="updateRequest" v-model="table.updateRequest" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -94,8 +86,6 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="updateResponseSukses">Update Response Sukses</label>
-                    <!-- <input id="updateResponseSukses" type="text" class="form-control"
-                        v-model="table.updateResponseSukses" placeholder="updateResponseSukses" autocomplete="off" /> -->
                     <select  id="updateResponseSukses" v-model="table.updateResponseSukses" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -106,8 +96,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="getRequest">Get Request</label>
-                    <!-- <input id="getRequest" type="text" class="form-control" v-model="table.getRequest"
-                        placeholder="getRequest" autocomplete="off" /> -->
                     <select  id="getRequest" v-model="table.getRequest" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -120,8 +108,6 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="getResponse">Get Response</label>
-                    <!-- <input id="getResponse" type="text" class="form-control" v-model="table.getResponse"
-                        placeholder="getResponse" autocomplete="off" /> -->
                     <select  id="getResponse" v-model="table.getResponse" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -132,8 +118,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="searchRequest">Search Request</label>
-                    <!-- <input id="searchRequest" type="text" class="form-control" v-model="table.searchRequest"
-                        placeholder="searchRequest" autocomplete="off" /> -->
                     <select  id="searchRequest" v-model="table.searchRequest" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -146,8 +130,6 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="searchResponse">Search Response</label>
-                    <!-- <input id="searchResponse" type="text" class="form-control" v-model="table.searchResponse"
-                        placeholder="searchResponse" autocomplete="off" /> -->
                     <select  id="searchResponse" v-model="table.searchResponse" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -158,8 +140,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="removeRequest">Remove Request</label>
-                    <!-- <input id="removeRequest" type="text" class="form-control" v-model="table.removeRequest"
-                        placeholder="removeRequest" autocomplete="off" /> -->
                     <select  id="removeRequest" v-model="table.removeRequest" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -173,8 +153,6 @@
 
                 <div class="form-group col-md-6">
                     <label for="removeResponse">Remove Response</label>
-                    <!-- <input id="removeResponse" type="text" class="form-control" v-model="table.removeResponse"
-                        placeholder="removeResponse" autocomplete="off" /> -->
                     <select  id="removeResponse" v-model="table.removeResponse" class="form-control" >
                         <option>Y</option>
                         <option>N</option>
@@ -185,8 +163,6 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="testValue">Test Value</label>
-                    <!-- <input id="testValue" type="text" class="form-control" v-model="table.testValue"
-                        placeholder="testValue" autocomplete="off" /> -->
                         <select  id="testValue" v-model="table.testValue" class="form-control" >
                             <option>Y</option>
                             <option>N</option>
