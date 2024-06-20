@@ -68,23 +68,22 @@ export default {
         }
     },
     methods: {
-        login() {
+        async login() {
             if (this.user.username && this.user.password) {
-                axios.post(process.env.VUE_APP_API_URL + 'api/users/login', {
+                await axios.post(process.env.VUE_APP_API_URL + 'api/users/login', {
                     username: this.user.username,
                     password: this.user.password
-                }).then(res => {
+                }).then(async res => {
                     localStorage.setItem("loggedIn", "true")
                     localStorage.setItem("token", res.data.data.token)
                     // ambil data user
-
-                    axios.get(process.env.VUE_APP_API_URL + 'api/users/current', {
+                     await axios.get(process.env.VUE_APP_API_URL + 'api/users/current', {
                         headers: {
                             'Authorization': localStorage.getItem('token')
                         }
                     }).then(result => {
                         this.loginFailed = 0;
-                        localStorage.setItem("name", result.data.data.name)
+                        localStorage.setItem("userName", result.data.data.name)
                     })
 
                     return this.$router.push({ name: 'dashboard' })

@@ -59,6 +59,20 @@ const routes = [
           return import('../views/Table/index.vue')
         }
       },
+      {
+        path: '/bank',
+        name: 'bankIndex',
+        component: function () {
+          return import('../views/Bank/BankIndexView.vue')
+        }
+      },
+      {
+        path: '/bankAdd',
+        name: 'bankAdd',
+        component: function () {
+          return import('../views/Bank/BankAddView.vue')
+        }
+      },
     ]
 
   }

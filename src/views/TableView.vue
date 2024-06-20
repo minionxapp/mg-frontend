@@ -193,7 +193,6 @@ export default {
 
     methods: {
         createTable() {
-
             let config = {
                 method: 'post',
                 maxBodyLength: Infinity,

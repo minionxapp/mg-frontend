@@ -3,7 +3,7 @@
         <a href="#" class="brand-link">
             <img src="/adminlte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                 class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light text-left">AdminLTE 3</span>
+            <span class="brand-text font-weight-light text-left">MgProject</span>
         </a>
         <div class="sidebar text-left">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -11,7 +11,7 @@
                     <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="">
                 </div>
                 <div class="info">
-                    <a href="/register" class="d-block">{{ user }}</a>
+                    <span class="text-light">{{ userName }}</span>
                 </div>
             </div>
             <div class="form-inline">
@@ -32,8 +32,10 @@
                     <NavItem icon="fas fa-info-circle" link="/about">About</NavItem>
                     <NavItem icon="fas fa-home" link="/register">Register</NavItem>
                     <NavItem icon="fa fa-bicycle" link="/logout">Logout</NavItem>
-                    <!-- <NavItem icon="fa fa-calculator" link="/table">Table</NavItem> -->
                     <NavItem icon="fa fa-calculator" link="/table/index">Table</NavItem>
+                    <li class="nav-header">-Setup-</li>
+                    <NavItem icon="fa fa-calculator" link="/bank">Bank</NavItem>
+                    <!-- <NavItem icon="fa fa-calculator" link="/bankAdd">Bank</NavItem> -->
                 </ul>
             </nav>
 
@@ -54,7 +56,7 @@ export default {
             //state token
             token: localStorage.getItem('token'),
             //state user
-            user: localStorage.getItem('name'),
+            userName: localStorage.getItem('userName'),
             //state validation
             validation: [],
             //state login failed

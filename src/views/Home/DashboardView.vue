@@ -49,6 +49,7 @@ export default {
   components :{
     Navbar,Sidebar,
   },
+  
   data() {
         return {
             //state loggedIn with localStorage
