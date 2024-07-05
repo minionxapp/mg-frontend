@@ -1,18 +1,18 @@
 <template>
-    Logout
-  </template>
-  <script>
-    import Auth from '@/auth.js'
-    export default {
-      data (){
-        return {
-  
-        }
-      },
-      created:function(){
-        Auth.logout();
-        // console.log(Auth.getLogin());
-        return this.$router.push({ name: 'login' })
-      }
+  Logout
+</template>
+<script>
+import Auth from '@/auth.js'
+export default {
+  data() {
+    return {
+
     }
-  </script>
+  },
+  created: function () {
+    Auth.logout();
+    // console.log(Auth.getLogin());
+    return this.$router.push({ name: 'login' })
+  }
+}
+</script>

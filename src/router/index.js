@@ -73,6 +73,13 @@ const routes = [
           return import('../views/Bank/BankAddView.vue')
         }
       },
+      {
+        path: '/bankEdit/:bankId',
+        name: 'bankEdit',
+        component: function () {
+          return import('../views/Bank/BankEditView.vue')
+        }
+      },
     ]
 
   }

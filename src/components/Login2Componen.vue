@@ -64,7 +64,9 @@ export default {
             //state validation
             validation: [],
             //state login failed
-            loginFailed: null
+            loginFailed: null,
+            role : localStorage.getItem('role'),
+            status : localStorage.getItem('status'),
         }
     },
     methods: {
@@ -76,6 +78,8 @@ export default {
                 }).then(async res => {
                     localStorage.setItem("loggedIn", "true")
                     localStorage.setItem("token", res.data.data.token)
+                    localStorage.setItem("role", res.data.data.role)
+                    localStorage.setItem("status", res.data.data.status)
                     // ambil data user
                      await axios.get(process.env.VUE_APP_API_URL + 'api/users/current', {
                         headers: {

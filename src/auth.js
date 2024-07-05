@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default {
     setLogin: function(data){
         localStorage.setItem("userName",data.user.name);
@@ -12,9 +13,10 @@ export default {
     //     }
     // },
     logout:function(){
-         localStorage.removeItem("loggedIn");
+        localStorage.removeItem("loggedIn");
         localStorage.removeItem("token");
         localStorage.removeItem("userName");
-        // localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        
     }   
 }

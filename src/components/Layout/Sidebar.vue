@@ -11,8 +11,10 @@
                     <img src="/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="">
                 </div>
                 <div class="info">
-                    <span class="text-light">{{ userName }}</span>
+                    <span class="text-light">{{ userName }}</span><br>
+                    <span class="text-light">{{ role }}</span>
                 </div>
+                
             </div>
             <div class="form-inline">
                 <div class="input-group" data-widget="sidebar-search">
@@ -26,16 +28,43 @@
                 </div>
             </div>
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" 
-                    data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" data-accordion="false">
                     <NavItem icon="fas fa-home" link="/">Home</NavItem>
                     <NavItem icon="fas fa-info-circle" link="/about">About</NavItem>
                     <NavItem icon="fas fa-home" link="/register">Register</NavItem>
                     <NavItem icon="fa fa-bicycle" link="/logout">Logout</NavItem>
-                    <NavItem icon="fa fa-calculator" link="/table/index">Table</NavItem>
-                    <li class="nav-header">-Setup-</li>
-                    <NavItem icon="fa fa-calculator" link="/bank">Bank</NavItem>
-                    <!-- <NavItem icon="fa fa-calculator" link="/bankAdd">Bank</NavItem> -->
+                    <NavItem v-if="['user1','admin'].includes(role)" icon="fa fa-calculator" link="/table/index">Table</NavItem>
+
+
+                    <li v-if="['user','admin'].includes(role)" class="nav-item menu-is-opening menu-open">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                Setup
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: block;">
+                            <NavItem icon="fa fa-calculator" link="/bank">Bank</NavItem>
+                            <NavItem v-if="['user','admin'].includes(role)" icon="fa fa-calculator" link="/table/index">Table</NavItem>
+                            <!-- Aselinya -->
+                            <li class="nav-item">
+                                <a href="pages/charts/chartjs.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>ChartJS</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/charts/flot.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Flot</p>
+                                </a>
+                            </li>
+
+
+                          
+                        </ul>
+                    </li>
                 </ul>
             </nav>
 
@@ -57,6 +86,7 @@ export default {
             token: localStorage.getItem('token'),
             //state user
             userName: localStorage.getItem('userName'),
+            role: localStorage.getItem('role'),
             //state validation
             validation: [],
             //state login failed
