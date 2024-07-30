@@ -1,0 +1,172 @@
+<template>
+
+    <!-- <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div> -->
+
+    <div class="modal fade bd-example-modal-xl" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New messageXXXXXXX</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <form @change="formUpdated"  @submit.prevent="createBank" class="form-signin" id="formbank">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="kode">Kode</label>
+                                <input id="kode" type="text" class="form-control" v-model="kolom.kode"
+                                    placeholder="Kode" autocomplete="off" />
+                                <div v-if="validation.namaTable" class="mt-2 alert alert-danger">
+                                    Masukkan Kode
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="nama">Kode</label>
+                                <input id="nama" type="text" class="form-control" v-model="kolom.nama"
+                                    placeholder="Nama Bank" autocomplete="off" />
+                                <div v-if="validation.namaTable" class="mt-2 alert alert-danger">
+                                    Masukkan Nama Bank
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="jenis">Jenis</label>
+                                <select id="jenis" v-model="kolom.jenis" class="form-control">
+                                    <option>Konvensional</option>
+                                    <option>Syariah</option>
+                                </select>
+                                <div v-if="validation.namaTable" class="mt-2 alert alert-danger">
+                                    Masukkan Jenis Bank
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="status">Status</label>
+                                <select id="status" v-model="selected" class="form-control">
+                                    <option value="">Please select one</option>
+                                    <option selected value="Y">Aktif</option>
+                                    <option value="N">Tidak Aktif</option>
+                                </select>
+                                <div v-if="validation.namaTable" class="mt-2 alert alert-danger">
+                                    Masukkan status Bank
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-1">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button type="button" @click="batal" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" @click="create" class="btn btn-primary">Send message</button>
+            </div> -->
+        </div>
+    </div>
+    <!-- </div> -->
+</template>
+
+<script>
+import axios from 'axios'
+import Swal from 'sweetalert2'
+export default {
+props:{cekUpdate : String},
+    data() {
+        return {
+            recipient: '',
+            validation: [],
+            kolom: [],
+            selected: "",
+            token: localStorage.getItem('token'),
+            formNotUpdated : false,
+            kodeUpdate : this.cekUpdate
+        }
+    },
+    methods: {
+        async formUpdated() {
+             this.formNotUpdated = true
+             this.kodeUpdate = '22'
+            },
+        batal() {
+            if (this.formNotUpdated === false) {
+                this.kolom.kode = ''
+                    this.kolom.nama = ''
+                    this.kolom.jenis = ''
+                    this.selected = ''
+                return this.$router.push({ name: 'bankIndex' })
+            }
+
+            Swal.fire({
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    this.createBank()
+                } else if (result.isDenied) {
+                    this.$emit('close');
+                    this.formNotUpdated = false
+                    this.kolom.kode = ''
+                    this.kolom.nama = ''
+                    this.kolom.jenis = ''
+                    this.selected = ''
+                }
+            });
+
+
+        },
+        createBank() {
+            let config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:3000/api/banks',
+                headers: {
+                    'Authorization': this.token
+                },
+                data: {
+                    'kode': this.kolom.kode,
+                    'nama': this.kolom.nama,
+                    'jenis': this.kolom.jenis,
+                    'status': this.selected,
+                }
+            };
+
+            axios.request(config)
+                .then((response) => {
+                    console.log(JSON.stringify(response.data));
+                    alert("Sukses")
+                    this.kolom.kode = ''
+                    this.kolom.nama = ''
+                    this.kolom.jenis = ''
+                    this.selected = ''
+                    return this.$router.push({ name: 'bankIndex' })
+                })
+                .catch((error) => {
+                    alert(error.response.data.errors)
+                });
+        }
+    }
+}
+</script>

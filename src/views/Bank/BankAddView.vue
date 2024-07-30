@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <router-link to="bank">Index</router-link>
+        <router-link to="bank">Back</router-link>
         <h1>Add Bank</h1>
         <form @submit.prevent="createBank" class="form-signin" id="formbank">
             <div class="row">
@@ -45,8 +45,14 @@
                     </div>
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-primary">Create</button>
+            <div class="row">
+                <div class="form-group col-md-1">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+                <div class="form-group col-md-6">
+                    <button type="button" @click="batal" class="btn btn-primary">Cancel</button>
+                </div>
+            </div>
         </form>
 
 
@@ -54,6 +60,7 @@
 </template>
 <script>
 import axios from 'axios'
+import Swal from 'sweetalert2'
 export default {
     name: 'addBank',
     data() {
@@ -66,6 +73,28 @@ export default {
 
     },
     methods: {
+        batal() {
+            if (this.formNotUpdated === false) {
+                return this.$router.push({ name: 'bankIndex' })
+            }
+
+            Swal.fire({
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                   this.createBank()
+                } else if (result.isDenied) {
+                    return this.$router.push({ name: 'bankIndex' })
+                }
+            });
+
+
+        },
         createBank() {
             let config = {
                 method: 'post',
@@ -91,6 +120,7 @@ export default {
                     this.kolom.nama = ''
                     this.kolom.jenis = ''
                     this.selected = ''
+                    return this.$router.push({ name: 'bankIndex' })
                 })
                 .catch((error) => {
                     alert(error.response.data.errors)

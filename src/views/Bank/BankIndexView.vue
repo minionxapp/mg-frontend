@@ -5,7 +5,6 @@
                 <h1>Bank List</h1>
             </div>
             <div class="col-md-6">
-
                 <div class="input-group input-group-lg">
                     <input type="search" class="form-control form-control-lg" placeholder="Type your keywords here"
                         value="Lorem ipsum" v-model="cari.kata">
@@ -16,6 +15,12 @@
                         <button type="submit" class="btn btn-lg btn-default" @click="add()">
                             <i class="fa fa-plus"></i>
                         </button>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                            @click="cek()" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+
+
                     </div>
                 </div>
             </div>
@@ -27,6 +32,7 @@
 
             <div class="card-body">
                 <table class="table table-bordered">
+                    <!--  -->
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
@@ -44,11 +50,13 @@
                             <td>{{ item.nama }} </td>
                             <td>{{ item.jenis }} </td>
                             <td>{{ item.status }} </td>
-                            <td><router-link :to="{ name: 'bankEdit', params: { bankId: item.id } }">Edit</router-link>
+                            <td>
+                                <router-link :to="{ name: 'bankEdit', params: { bankId: item.id } }"
+                                    style="margin-right: 4px;"><span class="btn btn-info btn-sm"><i
+                                            class="fas fa-pencil-alt"></i></span></router-link>
+                                <span class="btn btn-danger btn-sm" @click="hapus"><i class="fas fa-trash"></i></span>
                             </td>
 
-
-                            <td><span class="badge bg-danger">{{ item.panjang }}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -64,24 +72,29 @@
             </div>
         </div>
 
+        <!-- Modal -->
+
+        <bank-modal :cekUpdate="cekAja" />
 
 
-
-
-
-        
     </div>
 
 </template>
 
 <script>
+
 import axios from 'axios'
-import Auth from '@/auth.js'
+// *import Auth from '@/auth.js'
 
 import Swal from 'sweetalert2'
-// import 'sweetalert2/dist/sweetalert2.min.css';
+//* import 'sweetalert2/dist/sweetalert2.min.css';
+import BankModal from '@/components/BankModal.vue';
 export default {
+   
     name: 'getBank',
+    components: {
+        BankModal
+    },
     data() {
         return {
             validation: [],
@@ -91,32 +104,37 @@ export default {
             token: localStorage.getItem('token'),
             query: '',
             total_page: 0,
-            
-          
+            formNotUpdated: false,
+            cekAja:''
+
+
         }
     },
     mounted() {
         axios.get(process.env.VUE_APP_API_URL + '/api/user/ceklogin/?' + localStorage.getItem('token'), {
-                headers: {
-                    'Authorization': localStorage.getItem('token')
-                }
-            }).then(result => {
-            }).catch((error) => {
-                console.log(error.response.data.errors)
-                if (error.response.data.errors === "Unauthorized") {
-                    // this.$swal(process.env.VUE_APP_EXPIRED);
-                    Swal.fire({
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }
+        }).then(result => {
+        }).catch((error) => {
+            console.log(error.response.data.errors)
+            if (error.response.data.errors === "Unauthorized") {
+                Swal.fire({
                     title: "Unauthorized",
                     text: process.env.VUE_APP_EXPIRED,
                     icon: "error"
-                    });
-                    // Auth.logout();
-                    return this.$router.push({ name: 'login' })
-                }
+                });
+                return this.$router.push({ name: 'login' })
+            }
 
-            })
-	},
+        })
+    },
     methods: {
+        cek() {
+            this.cekAja = "0"
+            // alert("cek Dulu........."+this.cekAja)
+
+        },
         retrieve(page) {
             this.query = '';
             this.query = 'page=' + page;
@@ -143,13 +161,10 @@ export default {
                 if (error.response.data.errors === "Unauthorized") {
                     // alert(process.env.VUE_APP_EXPIRED)
                     Swal.fire({
-                    title: "The Internet?",
-                    text: "That thing is still around?",
-                    icon: "question"
+                        title: "The Internet?",
+                        text: "That thing is still around?",
+                        icon: "question"
                     });
-                    
-                    // this.$swal(process.env.VUE_APP_EXPIRED);
-                    // Auth.logout();
                     return this.$router.push({ name: 'login' })
                 }
 
@@ -160,7 +175,34 @@ export default {
         },
         add() {
             return this.$router.push({ name: 'bankAdd' })
+        },
+        hapus() {
+
+            if (this.formNotUpdated === false) {
+                return this.$router.push({ name: 'bankIndex' })
+            }
+
+            Swal.fire({
+                title: "Do you want to delete?",
+                // showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Hapus",
+                denyButtonText: `Don't save`
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    alert("Hapus.................")
+                } else if (result.isDenied) {
+                    return this.$router.push({ name: 'bankIndex' })
+                }
+            })
+        },
+        create() {
+            alert("kkkkkkkkkkkkk")
         }
     }
+
+
+
 }
 </script>

@@ -8,11 +8,11 @@ import ContentHeader from './components/Layout/ContentHeader.vue';
 import Content from './components/Layout/Content.vue'
 
 import VueSweetalert2 from 'vue-sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
+//* import 'sweetalert2/dist/sweetalert2.min.css';
 
 const app = createApp(App)
 app.component('content-header',ContentHeader)
-.component('content',Content).use(VueSweetalert2)
+.component('content',Content)
+// .use(VueSweetalert2)
 .use(store).use(router).mount('#app')
-// app.use(VueSweetalert2);
 import "bootstrap/dist/js/bootstrap.js"
